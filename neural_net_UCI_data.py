@@ -32,17 +32,18 @@ def parse_line(line: str) -> Tuple[List[float], List[float]]:
     # print(output)
     y=0
     inpt = []
-    for x in tokens[1:]:
-        x = x.replace("red", '0') 
-        x = x.replace("blue", '1')
-        x = x.replace("white", "2")
-        x= x.replace("gold", "3")
-        x= x.replace('green', '4')
-        x= x.replace("orange", "5")
-        x = x.replace('\n', '')
-        x= x.replace("brown", "6")
-        x = x.replace("black", '7')
-        inpt.append(float(x))
+    for x in range(len(tokens[1:])):
+        if x!=3:
+            tokens[x] = tokens[x].replace("red", '0') 
+            tokens[x] = tokens[x].replace("blue", '1')
+            tokens[x] = tokens[x].replace("white", "2")
+            tokens[x]= tokens[x].replace("gold", "3")
+            tokens[x]= tokens[x].replace('green', '4')
+            tokens[x]= tokens[x].replace("orange", "5")
+            tokens[x] = tokens[x].replace('\n', '')
+            tokens[x]= tokens[x].replace("brown", "6")
+            tokens[x] = tokens[x].replace("black", '7')
+            inpt.append(float(tokens[x]))
     return (inpt, output)
 
 
@@ -82,7 +83,7 @@ with open("flag.txt", "r") as f:
 td = normalize(training_data)
 #print(td)
 xtrain, xtest= train_test_split(td)
-nn = NeuralNet(28, 3, 1)
+nn = NeuralNet(27, 3, 1)
 nn.train(xtrain, iters=100_000, print_interval=1000, learning_rate=0.1)
 
 for i in nn.test_with_expected(xtest):
